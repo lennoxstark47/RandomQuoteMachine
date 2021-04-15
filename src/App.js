@@ -15,9 +15,11 @@ class App extends Component {
   componentDidMount(){
     fetch('https://gist.githubusercontent.com/natebass/b0a548425a73bdf8ea5c618149fe1fce/raw/f4231cd5961f026264bb6bb3a6c41671b044f1f4/quotes.json')
     .then(data => data.json())
-    .then(quotes => this.setState({quotes},() => {
-      this.setState({selectedQuoteIndex: this.selectQuoteIndex()})
-    }))
+    .then(quotes => this.setState({quotes}, this.generateRandomQuoteIndex))
+  }
+
+  generateRandomQuoteIndex = () => {
+    this.setState({selectedQuoteIndex: this.selectQuoteIndex()})
   }
 
   get selectedQuote(){
@@ -40,7 +42,11 @@ class App extends Component {
     return (
       <div id="quote-box">
         { this.selectedQuote ? `"${this.selectedQuote.quote}" -- ${this.selectedQuote.author}` : '' }
-        <Button className="button" displayName="Next Quote" id="new-quote" />
+        <Button className="button" 
+        displayName="Next Quote" 
+        id="new-quote" 
+        handleClick={this.generateRandomQuoteIndex}  
+        />
       </div>
     );
   }
