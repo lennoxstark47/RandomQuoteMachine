@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {random} from 'lodash';
-import Button from './components/button/button';
+import QuoteMachine from './components/QuoteMachine/QuoteMachine'
 import './App.css';
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   generateRandomQuoteIndex = () => {
-    this.setState({selectedQuoteIndex: this.selectQuoteIndex()})
+    this.setState({selectedQuoteIndex: this.generateNewIndex()})
   }
 
   get selectedQuote(){
@@ -29,7 +29,7 @@ class App extends Component {
     return this.state.quotes[this.state.selectedQuoteIndex];
   }
 
-  selectQuoteIndex = () => {
+  generateNewIndex = () => {
     if (!this.state.quotes.length) {
       return;
     }
@@ -41,12 +41,8 @@ class App extends Component {
     
     return (
       <div id="quote-box">
-        { this.selectedQuote ? `"${this.selectedQuote.quote}" -- ${this.selectedQuote.author}` : '' }
-        <Button className="button" 
-        displayName="Next Quote" 
-        id="new-quote" 
-        handleClick={this.generateRandomQuoteIndex}  
-        />
+        <QuoteMachine selectedQuote={this.selectedQuote} 
+        generateRandomQuoteIndex={this.generateRandomQuoteIndex}/>
       </div>
     );
   }
