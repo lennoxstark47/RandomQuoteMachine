@@ -32,7 +32,9 @@ const QuoteMachine = ({
         <IconButton
           id='tweet-quote'
           target='_blank'
-          href={`https://twitter.com/intent/tweet?text=${selectedQuote.quote}&hashtags=lennoxstark47`}>
+          href={encodeURI(
+            `https://twitter.com/intent/tweet?text=${selectedQuote.quote}&hashtags=lennoxstark47`
+          )}>
           <FontAwesomeIcon
             icon={faTwitter}
             size='md'></FontAwesomeIcon>
